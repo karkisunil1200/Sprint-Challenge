@@ -5,7 +5,7 @@ export default function SearchForm(props) {
   const [searchResult, setSearchResult] = useState([]);
 
   useEffect(() => {
-    const result = props.characters.map(character =>
+    const result = props.characters.filter(character =>
       character.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setSearchResult(result);
@@ -30,7 +30,6 @@ export default function SearchForm(props) {
 
       <ul>
         {searchResult.map(character => {
-          console.log(character);
           return <li>{character}</li>;
         })}
       </ul>

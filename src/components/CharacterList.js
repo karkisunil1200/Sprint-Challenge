@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import CharacterCard from './CharacterCard';
 import SearchForm from './SearchForm';
+import {Characters} from './CharacterCardSyled';
 
 export default function CharacterList() {
   const [characters, setCharacters] = useState([]);
@@ -21,11 +22,13 @@ export default function CharacterList() {
   }, []);
 
   return (
-    <section className='character-list'>
+    <>
       <SearchForm characters={characters} />
-      {characters.map((character, index) => {
-        return <CharacterCard key={index} character={character} />;
-      })}
-    </section>
+      <Characters>
+        {characters.map((character, index) => {
+          return <CharacterCard key={index} character={character} />;
+        })}
+      </Characters>
+    </>
   );
 }

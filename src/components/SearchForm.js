@@ -25,6 +25,7 @@ export default function SearchForm(props) {
           placeholder='Search...'
           onChange={changeHandler}
           value={searchTerm}
+          class='text'
         />
       </form>
 

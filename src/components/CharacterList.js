@@ -22,8 +22,8 @@ export default function CharacterList() {
 
   return (
     <section className='character-list'>
-      {characters.map(character => {
-        return <CharacterCard character={character} />;
+      {characters.map((character, index) => {
+        return <CharacterCard key={index} character={character} />;
       })}
     </section>
   );

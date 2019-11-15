@@ -1,12 +1,20 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
-export default function SearchForm() {
+export default function SearchForm(props) {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResult, setSearchResult] = useState([]);
 
+  useEffect(() => {
+    const result = props.characters.map(character =>
+      character.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSearchResult(result);
+  }, [searchTerm]);
+
   const changeHandler = e => {
-    setSearchTerm({[e.target.name]: e.target.value});
+    setSearchTerm(e.target.value);
   };
+
   return (
     <section className='search-form'>
       <h3>Search for the name!</h3>
@@ -19,6 +27,13 @@ export default function SearchForm() {
           value={searchTerm}
         />
       </form>
+
+      <ul>
+        {searchResult.map(character => {
+          console.log(character);
+          return <li>{character}</li>;
+        })}
+      </ul>
     </section>
   );
 }

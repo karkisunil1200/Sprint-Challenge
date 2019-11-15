@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 
 import CharacterCard from './CharacterCard';
+import SearchForm from './SearchForm';
 
 export default function CharacterList() {
   const [characters, setCharacters] = useState([]);
@@ -12,7 +13,6 @@ export default function CharacterList() {
     axios
       .get('https://rickandmortyapi.com/api/character/')
       .then(res => {
-        console.log(res.data.results);
         setCharacters(res.data.results);
       })
       .catch(err => {
@@ -22,6 +22,7 @@ export default function CharacterList() {
 
   return (
     <section className='character-list'>
+      <SearchForm characters={characters} />
       {characters.map((character, index) => {
         return <CharacterCard key={index} character={character} />;
       })}

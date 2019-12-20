@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 import CharacterCard from './CharacterCard';
@@ -24,11 +25,14 @@ export default function CharacterList() {
   return (
     <>
       <SearchForm characters={characters} />
-      <Characters>
-        {characters.map((character, index) => {
-          return <CharacterCard key={index} character={character} />;
-        })}
-      </Characters>
+
+      <Link to={`characterlist/${characters.id}`}>
+        <Characters>
+          {characters.map((character, index) => {
+            return <CharacterCard key={index} character={character} />;
+          })}
+        </Characters>
+      </Link>
     </>
   );
 }

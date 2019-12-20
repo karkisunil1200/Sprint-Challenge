@@ -8,6 +8,7 @@ import {Characters} from './CharacterCardSyled';
 
 export default function CharacterList() {
   const [characters, setCharacters] = useState([]);
+  const [search, setSearch] = useState('');
 
   // TODO: Add useState to track data from useEffect
 
@@ -15,24 +16,43 @@ export default function CharacterList() {
     axios
       .get('https://rickandmortyapi.com/api/character/')
       .then(res => {
-        setCharacters(res.data.results);
+        console.log(res.data.results);
+
+        const lists = res.data.results.filter(list =>
+          list.name.toLowerCase().includes(search.toLowerCase())
+        );
+        setCharacters(lists);
       })
       .catch(err => {
         console.log(err);
       });
-  }, []);
+  }, [search]);
+
+  const changeHandle = e => {
+    setSearch(e.target.value);
+  };
 
   return (
     <>
-      <SearchForm characters={characters} />
+      <form>
+        <input
+          type='text'
+          name='search'
+          placeholder='Search...'
+          onChange={changeHandle}
+          value={search}
+        />
+      </form>
 
-      <Link to={`characterlist/${characters.id}`}>
-        <Characters>
-          {characters.map((character, index) => {
-            return <CharacterCard key={index} character={character} />;
-          })}
-        </Characters>
-      </Link>
+      <Characters>
+        {characters.map((character, index) => {
+          return (
+            <Link to={`/characterlist/${character.id}`}>
+              <CharacterCard key={index} character={character} />
+            </Link>
+          );
+        })}
+      </Characters>
     </>
   );
 }

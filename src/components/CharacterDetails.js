@@ -1,10 +1,6 @@
 import React from 'react';
 
-const CharacterList = props => {
-  return (
-    <div>
-      <h1>Character List ma welcome cha</h1>
-    </div>
-  );
+const CharacterDetails = props => {
+  return <div></div>;
 };
-export default CharacterList;
+export default CharacterDetails;

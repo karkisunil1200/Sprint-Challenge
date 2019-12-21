@@ -1,5 +1,12 @@
-import React from "react";
+import React from 'react';
 
-export default function CharacterCard() {
-  return <span>todo: character</span>;
+import {Character, Name} from './CharacterCardSyled';
+
+export default function CharacterCard(props) {
+  return (
+    <Character>
+      <Name>{props.character.name}</Name>
+      <img src={props.character.image} alt={props.character.name} />
+    </Character>
+  );
 }
